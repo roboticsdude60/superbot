@@ -283,6 +283,32 @@ Children:
         value: []
     Base: Subsystem
     Name: GearHolder
+  - Children:
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '7'
+      Base: CAN Talon
+      Name: FuelIntakeController
+    Properties:
+      Default command parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Default command parameters
+        validators: null
+        value: []
+      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Default Command, type: Command, validators: null, value: None}
+      Constants: !!robotbuilder.data.properties.ConstantsProperty
+        default: []
+        name: Constants
+        validators: null
+        value: []
+    Base: Subsystem
+    Name: FuelPickup
   Properties: {}
   Base: Subsystems
   Name: Subsystems
@@ -462,7 +488,7 @@ Children:
         validators: null
         value: []
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: None}
+        name: Requires, type: Subsystem, validators: null, value: FuelPickup}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
         default: []
         name: Parameter presets
@@ -482,10 +508,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: None}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id014 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id014
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -500,52 +526,16 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: GearHolder}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id015 []
-        name: Parameter presets
-        validators: null
-        value: *id015
-      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
-    Base: Command
-    Name: PickupGearFromGround
-  - Children: []
-    Properties:
-      Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
-        name: Parameters
+        name: Parameter presets
         validators: null
         value: []
-      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: GearHolder}
-      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id016 []
-        name: Parameter presets
-        validators: null
-        value: *id016
-      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
-    Base: Command
-    Name: GetGearFromHumanPlayer
-  - Children: []
-    Properties:
-      Parameters: !!robotbuilder.data.properties.ParametersProperty
-        default: []
-        name: Parameters
-        validators: null
-        value: []
-      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: GearHolder}
-      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id017 []
-        name: Parameter presets
-        validators: null
-        value: *id017
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: CloseGearClamp
   - Children: []
-    Properties: &id022
+    Properties: &id015
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -554,10 +544,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: GearHolder}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id018 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id018
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -572,10 +562,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: GearHolder}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id019 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id019
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -588,15 +578,18 @@ Children:
         validators: null
         value: []
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id020 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id020
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id030
-        - &id025 !!robotbuilder.data.CommandGroupEntry
+        default: []
+        name: Commands
+        validators: [List]
+        value:
+        - &id017 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: &id023
+            base: &id016
               help: A command specifies an action that the robot can perform.
               name: Command
               properties:
@@ -610,14 +603,14 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id021 []
+                default: &id014 []
                 name: Parameter presets
                 validators: null
-                value: *id021
+                value: *id014
               supports: {}
               type: Command
             name: OpenGearClamp
-            properties: *id022
+            properties: *id015
           hasMatch: true
           order: Sequential
           parameters:
@@ -626,11 +619,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id027 !!robotbuilder.data.CommandGroupEntry
+        - &id018 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id023
+            base: *id016
             name: MoveGearLiftDown
-            properties: &id031
+            properties: &id020
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -639,10 +632,10 @@ Children:
               Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
                 name: Requires, type: Subsystem, validators: null, value: GearHolder}
               Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id024 []
+                default: []
                 name: Parameter presets
                 validators: null
-                value: *id024
+                value: []
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -652,12 +645,12 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id025
-        - &id029 !!robotbuilder.data.CommandGroupEntry
+          previous: *id017
+        - &id019 !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id023
+            base: *id016
             name: BackUp
-            properties: &id032
+            properties: &id021
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -666,10 +659,10 @@ Children:
               Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
                 name: Requires, type: Subsystem, validators: null, value: Drive}
               Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id026 []
+                default: []
                 name: Parameter presets
                 validators: null
-                value: *id026
+                value: []
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -679,12 +672,12 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id027
+          previous: *id018
         - !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id023
+            base: *id016
             name: GearLiftToDefault
-            properties: &id033
+            properties: &id022
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -693,10 +686,10 @@ Children:
               Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
                 name: Requires, type: Subsystem, validators: null, value: GearHolder}
               Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id028 []
+                default: []
                 name: Parameter presets
                 validators: null
-                value: *id028
+                value: []
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -706,24 +699,21 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id029
-        name: Commands
-        validators: [List]
-        value: *id030
+          previous: *id019
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: LetGoOfGearOnPeg
   - Children: []
-    Properties: *id031
+    Properties: *id020
     Base: Command
     Name: MoveGearLiftDown
   - Children: []
-    Properties: *id032
+    Properties: *id021
     Base: Command
     Name: BackUp
   - Children: []
-    Properties: *id033
+    Properties: *id022
     Base: Command
     Name: GearLiftToDefault
   Properties: {}
