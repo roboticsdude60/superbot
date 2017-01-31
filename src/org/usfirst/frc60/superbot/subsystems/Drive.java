@@ -80,5 +80,9 @@ public class Drive extends Subsystem {
     public void turn(double turn) {
     	robotDrive4.arcadeDrive(0.0, turn);
     }
+    
+ // TalonControlMode includes:
+//    public enum TalonControlMode implements CANSpeedController.ControlMode {
+//        PercentVbus(0), Position(1), Speed(2), Current(3), Voltage(4), Follower(5), MotionProfile(6), Disabled(15);
 }
 
