@@ -11,6 +11,7 @@
 
 package org.usfirst.frc60.superbot.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc60.superbot.Robot;
 import helperCode.PixySerialPort;
 /**
@@ -41,8 +42,15 @@ public class TurnToGearTestPixy extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    double turn = 0.0;
     protected void execute() {
-    	Robot.drive.turn(PixySerialPort.getTurnValue() );
+    	turn = PixySerialPort.getTurnValue();
+    	if (Math.abs(turn ) > 0.6){
+    		Robot.drive.turn( Math.signum(turn) * 0.45 );
+    	}else {
+        	Robot.drive.turn( turn );		
+    	}
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
