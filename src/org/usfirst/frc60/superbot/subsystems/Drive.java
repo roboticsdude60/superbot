@@ -15,9 +15,13 @@ import org.usfirst.frc60.superbot.Robot;
 import org.usfirst.frc60.superbot.RobotMap;
 import org.usfirst.frc60.superbot.commands.*;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import motionprofiles.magicMotionProfile;
 
 
 /**
@@ -61,11 +65,27 @@ public class Drive extends Subsystem {
     }
     
     public void drivefromjoystick() {
+    	SmartDashboard.putString("LeftEnc", " " + RobotMap.driveLeftBack.getEncPosition());
+    	SmartDashboard.putString("RightEnc", " " + RobotMap.driveRightBack.getEncPosition());
     	robotDrive4.arcadeDrive( -1 * Robot.oi.driveJoystick.getY(), -1 * Robot.oi.driveJoystick.getZ() );
     }
     
     public void stop() {
     	robotDrive4.stopMotor();
+    }
+    
+    public void setUpMagic() {
+    	motionprofiles.magicMotionProfile.initMagicMode(leftBack, leftFront);
+    }
+    public void setMagicPoint(double pos) {
+    	SmartDashboard.putString("LeftEnc", " " + RobotMap.driveLeftBack.getEncPosition());
+		leftBack.set(pos);
+    }
+    public void setVMode() {
+    	leftBack.changeControlMode(TalonControlMode.PercentVbus);
+    	leftFront.changeControlMode(TalonControlMode.PercentVbus);
+    	rightBack.changeControlMode(TalonControlMode.PercentVbus);
+    	rightFront.changeControlMode(TalonControlMode.PercentVbus);
     }
     
     public double getDistanceTraveled() {
