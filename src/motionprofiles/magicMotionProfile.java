@@ -18,7 +18,7 @@ public class magicMotionProfile {
 		leftMaster.setPosition(0);//zero the encoder position to zero
 			
 		//this is important
-		leftMaster.reverseSensor(true);//want both to show positive
+		//im putting this in Drive leftMaster.reverseSensor(true);//want both to show positive
 		
 		leftMaster.changeControlMode(TalonControlMode.MotionMagic);
 		
@@ -29,7 +29,7 @@ public class magicMotionProfile {
 
 		leftMaster.setI(0.0);
 		
-		leftMaster.setD(20.0);
+		leftMaster.setD(0.0);
 		
 		leftMaster.setIZone(0);//not sure what this is
 		
@@ -38,7 +38,7 @@ public class magicMotionProfile {
 		leftMaster.configPeakOutputVoltage(12.0, -12.0);
 			
 		leftMaster.setMotionMagicCruiseVelocity(300); //RPM
-		leftMaster.setMotionMagicAcceleration(300); //RPM per second, or in this case 1 second to reach cruise velocity.
+		leftMaster.setMotionMagicAcceleration(400); //RPM per second, or in this case 1 second to reach cruise velocity.
 		
 		leftMaster.changeControlMode(TalonControlMode.MotionMagic);
 	}

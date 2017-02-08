@@ -61,9 +61,10 @@ public class GearCamera extends Subsystem {
 			readNextMessage();
 			parseMessage();
 		}
-		if (!waitingForMessage) {
+		if (pixy.getBytesReceived() < 2) {
 			requestMessage();
 		}
+		System.out.println(message);
 	}
 	
 	public boolean isGoodRead() {
@@ -94,6 +95,7 @@ public class GearCamera extends Subsystem {
 	private void readNextMessage() {
 		message = pixy.readString();
 		waitingForMessage = false;
+		System.out.println(message);
 	}
 	private void requestMessage() {
 		pixy.writeString("R");

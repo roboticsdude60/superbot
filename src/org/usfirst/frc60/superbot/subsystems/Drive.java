@@ -48,7 +48,7 @@ public class Drive extends Subsystem {
     private double avgCounts = 0;
     private int leftCounts = 0;
     private int rightCounts = 0;
-    
+    public boolean isMagicked = false;
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -65,8 +65,8 @@ public class Drive extends Subsystem {
     }
     
     public void drivefromjoystick() {
-    	SmartDashboard.putString("LeftEnc", " " + RobotMap.driveLeftBack.getEncPosition());
-    	SmartDashboard.putString("RightEnc", " " + RobotMap.driveRightBack.getEncPosition());
+    	SmartDashboard.putString("LeftEnc", " " + leftBack.getEncPosition());
+    	SmartDashboard.putString("RightEnc", " " + rightBack.getEncPosition());
     	robotDrive4.arcadeDrive( -1 * Robot.oi.driveJoystick.getY(), -1 * Robot.oi.driveJoystick.getZ() );
     }
     
@@ -76,6 +76,8 @@ public class Drive extends Subsystem {
     
     public void setUpMagic() {
     	motionprofiles.magicMotionProfile.initMagicMode(leftBack, leftFront);
+    	configEncoders();
+    	isMagicked = true;
     }
     public void setMagicPoint(double pos) {
     	SmartDashboard.putString("LeftEnc", " " + RobotMap.driveLeftBack.getEncPosition());
@@ -86,6 +88,8 @@ public class Drive extends Subsystem {
     	leftFront.changeControlMode(TalonControlMode.PercentVbus);
     	rightBack.changeControlMode(TalonControlMode.PercentVbus);
     	rightFront.changeControlMode(TalonControlMode.PercentVbus);
+    	
+    	isMagicked = false;
     }
     
     public double getDistanceTraveled() {
@@ -95,6 +99,10 @@ public class Drive extends Subsystem {
     	lastAvgEncoderCount = (leftCounts + rightCounts ) /2;
     	return avgCounts * countsPerInch;
     	
+    }
+    public void configEncoders() {// want positive to be when moving gear direction
+    	leftBack.reverseSensor(true);
+    	rightBack.reverseSensor(false);
     }
     
     public void turn(double turn) {
