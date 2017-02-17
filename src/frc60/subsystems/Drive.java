@@ -50,6 +50,10 @@ public class Drive extends Subsystem {
     	SmartDashboard.putNumber("RightV", rightBack.getOutputVoltage() );
     	SmartDashboard.putNumber("RightPos", rightBack.getPosition());
     }
+    public void driveAngle(double forward,double angle) {
+    	setRegMode();
+    	robotDrive2.arcadeDrive(forward, Robot.navx.getFusedHeading()-angle);
+    }
     public void stop() {
     	robotDrive2.stopMotor();
     }
