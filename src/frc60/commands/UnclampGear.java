@@ -37,7 +37,6 @@ public class UnclampGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearHolder.init();
     	setTimeout(0.75);
     	Robot.gearHolder.loosenClamp();
     }
