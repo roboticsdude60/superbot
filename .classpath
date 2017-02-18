@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="C:/Users/Team 60 Office/wpilib/java/current/lib/opencv-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Team 60 Office/wpilib/java/current/lib/WPILib.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Team 60 Office/wpilib/java/current/lib/WPILib-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
